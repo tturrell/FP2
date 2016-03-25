@@ -13,7 +13,7 @@ Getting started
      (head (title "My Page"))
      (body (h1 "Here are some words")))))
 ```
-
+![Web Site](https://github.com/tturrell/FP2/blob/master/2_2.jpg)
 Test of post
 
 `(struct post ( "New Post" "Here are some more words"))`
