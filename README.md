@@ -4,6 +4,7 @@ DUE Wednesday, March 23, 2016
 
 ## My Library: (Continue: Web Applications in Racket)
 My name:Tyrone Turrell
+
 Getting started
 ```racket
 #lang web-server/insta
@@ -37,6 +38,8 @@ There is an attempt to follow the next step.
 ```
 And some subsequent steps and explaination of how things work that mainly gets printed in the racket output
 but doesn't not make any difference to the the web application.
+
+![Racket Output](https://github.com/tturrell/FP2/blob/master/2_1.jpg)
 ```racket
 (list 'html (list 'head (list 'title "Some title"))
        (list 'body (list 'p "This is a simple static page.")))
