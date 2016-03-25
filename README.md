@@ -1,52 +1,79 @@
 # Final Project Assignment 2: Exploration (FP2)
 DUE Wednesday, March 23, 2016
 
-Exactly like Exploration 1: https://github.com/oplS16projects/FP1. Do a different library. Explore something different, either related or completely not. Try something else out. This is also an individual assignment. 
-Be sure to do your write up in the FP2 repository, and pull request against it to turn in.
 
-During this assignment, start looking for teammates! Use the email list! 
-When posting on the email list, be sure to include:
-* what you're interested in doing
-* what libraries you looked at for FP1 and FP2
-* when you will be able to meet to work on project
+## My Library: (Continue: Web Applications in Racket)
+My name:Tyrone Turrell
+Getting started
+```racket
+#lang web-server/insta
+(define (start request)
+  (response/xexpr
+   '(html
+     (head (title "My Page"))
+     (body (h1 "Here are some words")))))
+```
 
-### The following libraries are not allowed for project explorations:
-* games/cards
-* racket/gui
-* racket/draw 
+Test of post
 
-You can still use these in your project, but you must explore different libraries for this assignment.
+`(struct post ( "New Post" "Here are some more words"))`
+As no suprise this doesn't work
 
-##DELETE THIS AND EVERYTHING ABOVE IT BEFORE SUBMITTING
+Tried blog
+`(define BLOG (list (post "First Post!"  "Hey, this is my first post!")))`
 
-## My Library: (library name here)
-My name:
-Write what you did!
-Remember that this report must include:
+which failed as well
 
-* a narrative of what you did
-* highlights of code that you wrote, with explanation
-* output from your code demonstrating what it produced
-* at least one diagram or figure showing your work
+There is an attempt to follow the next step.
+```
+(define xexpr/c
+  (flat-rec-contract
+   xexpr
+   (or/c string?
+         (cons/c symbol? (listof xexpr))
+         (cons/c symbol?
+                 (cons/c (listof (list/c symbol? string? ))
+                         (listof xexpr))))))
+```
+And some subsequent steps and explaination of how things work that mainly gets printed in the racket output
+but doesn't not make any difference to the the web application.
+```racket
+(list 'html (list 'head (list 'title "Some title"))
+       (list 'body (list 'p "This is a simple static page.")))
+'(html (head (title "Some title"))
+       (body (p "This is a simple static page.")))
+; render-greeting: string -> response
+; Consumes a name, and produces a dynamic response.
+(define (render-greeting a-name)
+  (response/xexpr
+   `(html (head (title "Welcome"))
+          (body (p ,(string-append "Hello " a-name))))))
 
-The narrative itself should be no longer than 350 words. Yes, you need at least one image (output, diagrams). Images must be embedded into this md file. We should not have to click a link to see it. This is github, handling files is awesome and easy!
+```
 
-Code should be delivered in two ways:
+Exercise. Write a function that consumes a post and produces an X-expression representing that content.
+It is left as an exercise to do anything useful at this stage- so I stop.
+```racket
+;;(render-post (post "First post!" "This is a first post."))
 
-1. Full files should be added to your version of this repository.
-1. Key excerpts of your code should be copied into this .md file, formatted to look like code, and explained.
-
-Ask questions publicly in the email group.
-
-## How to Prepare and Submit this assignment
-
-1. To start, [**fork** this repository][forking]. 
-  2. (This assignment is just one README.md file, so you can edit it right in github)
-1. Modify the README.md file and [**commit**][ref-commit] changes to complete your report.
-1. Add your racket file to the repository. 
-1. Ensure your changes (report in md file, and added rkt file) are committed to your forked repository.
-1. [Create a **pull request**][pull-request] on the original repository to turn in the assignment.
-
+'(div ((class "post")) "First post!" (p "This is a first post."))
+```
+```racket
+; render-as-itemized-list: (listof xexpr) -> xexpr
+; Consumes a list of items, and produces a rendering
+; as an unordered list.
+(define (render-as-itemized-list fragments)
+  `(ul ,@(map render-as-item fragments)))
+ 
+; render-as-item: xexpr -> xexpr
+; Consumes an xexpr, and produces a rendering
+; as a list item.
+(define (render-as-item a-fragment)
+  `(li ,a-fragment))
+  ```
+  There is no reason to do more until I can solve the initial puzzles-- if I even need to.
+  
+  
 ## Project Schedule
 This is the first part of a larger project. The final project schedule is [here][schedule]
 
